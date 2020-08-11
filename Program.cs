@@ -31,7 +31,8 @@ namespace bootloader
             Storage s = new MirrorStorage("./rootfs");
             byte[] data = s.ReadAllBytes("/sys/vos");
             Assembly asm = Assembly.Load(data);
-            asm.EntryPoint.Invoke(null, new object[] { new string[] { "mirror", "./rootfs" } });
+            
+            asm.GetType("Vos.VOS").GetMethod("Main").Invoke(null, new object[] { new string[] { "mirror", "./rootfs" } });
         }
     }
 }
